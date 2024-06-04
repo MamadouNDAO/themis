@@ -1,0 +1,149 @@
+<div [ngClass]="theme.color == 'pmu-color' ? 'scroll-pmu' : 'scroll-sci'" class="page-generale">
+  <app-menu></app-menu>
+  <div class="container">
+    <div class="header-top">
+      <span class="title-service">Tableau de bord</span>
+      <div class="part-input-search">
+        <mat-icon  class="icon-password" fontSet="material-icons-outlined">search</mat-icon>
+        <input type="text" placeholder="Rechercher sur le tableau de bord">
+      </div>
+      <div class="info-user">
+        <div class="notif">
+          <img src="assets/icon/notification.png" alt="">
+          <span [class]="theme.bgColor+' counter-notif'">11</span>
+        </div>
+        <img src="assets/icon/historique-grise.png" alt="">
+        <img src="assets/icon/support.png" alt="">
+      </div>
+    </div>
+    <div class="content-dashbord">
+      <div class="option-on-top on-dashboard">
+        <div class="item-metric">
+          <div class="on-left">
+            <span class="title-metric">Notification</span>
+            <span class="metric">16</span>
+          </div>
+          <img src="assets/icon/metric/notification.png" alt="">
+        </div>
+        <div [class]="theme.bgColor+' item-metric'">
+          <div class="on-left">
+            <span class="title-metric">Alarmes</span>
+            <span class="metric">16</span>
+          </div>
+          <img src="assets/icon/metric/blanc/alarm.png" alt="">
+        </div>
+        <div class="item-metric">
+          <div class="on-left">
+            <span class="title-metric">Interventions</span>
+            <span class="metric">16</span>
+          </div>
+          <img src="assets/icon/metric/intervention.png" alt="">
+        </div>
+
+        <div class="item-metric">
+          <div class="on-left">
+            <span class="title-metric">Personnes sur site</span>
+            <span class="metric">16</span>
+          </div>
+          <img src="assets/icon/metric/group-personne.png" alt="">
+        </div>
+
+        <div class="item-metric">
+          <div class="on-left">
+              <span class="title-metric">Inscription</span>
+            <span class="metric">16</span>
+          </div>
+          <img src="assets/icon/metric/inscription.png" alt="">
+        </div>
+
+
+      </div>
+      <table class="table-principal">
+        <thead class="tr-table">
+          <tr>
+            <th class="th-table">
+              <div>
+                <span>Motif</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table">
+              <div>
+                <span>Espace</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table">
+              <div>
+                <span>Etage</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table">
+              <div>
+                <span>Site</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table">
+              <div>
+                <span>Entité</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table">
+              <div>
+                <span>Gravité</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table th-action">
+              <div>
+                <span>Actions</span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <tr (click)="selectItem(i)" [ngClass]="item.selected ? theme.bgColor : ''" class="tr-table" *ngFor="let item of alarmes | paginate: { itemsPerPage: itemParPage, currentPage: p }; index as i">
+          <td  class="td-table">{{item.motif}}</td>
+          <td  class="td-table">{{item.espace}}</td>
+          <td  class="td-table">{{item.etage}}</td>
+          <td  class="td-table">{{item.site}}</td>
+          <td  class="td-table">{{item.entite}}</td>
+          <td  class="td-table">{{item.gravite}}</td>
+          <td  class="td-table th-action">
+            <div class="td-action">
+              <img  [src]="item.selected ? 'assets/icon/tableau/blanc/incident.png' : 'assets/icon/tableau/noir/incident.png'" alt="">
+              <img [src]="item.selected ? 'assets/icon/tableau/blanc/localisation.png' : 'assets/icon/tableau/noir/localisation.png'" alt="">
+              <img [src]="item.selected ? 'assets/icon/tableau/blanc/calendar.png' : 'assets/icon/tableau/noir/calendar.png'" alt="">
+            </div>
+          </td>
+        </tr>
+
+        </tbody>
+
+      </table>
+      <div class="tr-paginator">
+        <div class="option-on-bottom">
+          <span>{{total}} alarmes</span>
+          <div class="my-paginator">
+            <img src="assets/icon/tableau/first-page.png" alt="" (click)="changePage(1)">
+            <img src="assets/icon/tableau/precedent.png" alt="" (click)="changePage(p-1)">
+            <div class="list-page">
+              <span [class.actif-li]="p == i+1"  (click)="changePage(i+1)" *ngFor="let index of [].constructor(nombrePage); let i = index">{{ i + 1 }}</span>
+
+            </div>
+            <img src="assets/icon/tableau/suivant.png" alt="" (click)="changePage(p+1)">
+            <img src="assets/icon/tableau/last-page.png" alt="" (click)="changePage(nombrePage)">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <br>
+    <!---->
+  </div>
+</div>

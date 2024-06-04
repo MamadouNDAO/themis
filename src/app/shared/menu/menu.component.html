@@ -1,0 +1,242 @@
+<div [ngClass]="theme.color == 'pmu-color' ? 'scroll-pmu' : 'scroll-sci'" class="menu-left">
+  <div [class]="theme.bgColor+' part-top'">
+    <img routerLink="/acceuil" src="assets/images/white-icon-horse.png" alt="icon retour" class="arrow">
+    <span *ngIf="theme.color == 'pmu-color'">PMU <small>& Moi</small></span>
+    <span *ngIf="theme.color == 'sci-color'">Bienvenue</span>
+  </div>
+  <div class="my-flex-c">
+    <div class="list-menu">
+      <div  routerLink="/dashboard22" [ngClass]="isRouteActive('/dashboard') ? theme.menuActifs : ''" [class]="' item-menu menu-grise'">
+        <img [src]="isRouteActive('/dashboard') ? 'assets/icon/dashboard-actif.png' : 'assets/icon/noir/dashboard.svg'" alt="" class="icon-menu">
+        <span>Tableau de bord</span>
+      </div>
+
+      <div routerLink="/actualite" [ngClass]="isRouteActive('/actualite') ? theme.menuActifs : ''" [class]="' item-menu'">
+        <img [src]="isRouteActive('/actualite') ? 'assets/icon/blanc/actualite.svg' : 'assets/icon/actu.png'"  alt="" class="icon-menu">
+        <span>Fil d'actualite</span>
+      </div>
+
+
+      <div [ngClass]="(isThisRoute && !panelServiceOpen) ? theme.bgColor :  ''" [class]="hPanelService+' my-expansion'">
+        <div class="expan-header" (click)="onExpansionService()">
+          <img [src]="(isThisRoute && !panelServiceOpen) ? 'assets/icon/blanc/service.svg' : 'assets/icon/service.png'" alt="" class="icon-profil">
+          <span>Services</span>
+          <img [ngClass]="(isThisRoute && !panelServiceOpen) ? 'rotate' :  ''" [src]="(isThisRoute && !panelServiceOpen) ? 'assets/icon/blanc/chevron.svg' : 'assets/icon/'+iconArrowService" alt="" class="icon-arrow">
+        </div>
+        <div routerLink="/reservation" [ngClass]="isRouteActive('/reservation') ? theme.menuActifs : ''" *ngIf="panelServiceOpen" class="item-param-accordion  first-accordion">
+          <img [src]="isRouteActive('/reservation') ? 'assets/icon/blanc/calendar.svg' : 'assets/icon/noir/calendar.svg'"  alt="" class="icon-menu">
+          <span>Reservation</span>
+        </div>
+        <div routerLink="/incidents" [ngClass]="isRouteActive('/incidents') ? theme.menuActifs : ''" *ngIf="panelServiceOpen" class="item-param-accordion ">
+          <img [src]="isRouteActive('/incidents') ? 'assets/icon/blanc/incident.svg' : 'assets/icon/noir/incident.svg'" alt="" class="icon-menu">
+          <span>Incidents</span>
+        </div>
+        <div  routerLink="/restauration" [ngClass]="isRouteActive('/restauration') ? theme.menuActifs : ''" *ngIf="panelServiceOpen" class="item-param-accordion ">
+          <img [src]="isRouteActive('/restauration') ? 'assets/icon/blanc/restaurant.svg' : 'assets/icon/noir/restaurant.svg'" src="assets/icon/noir/restaurant.svg" alt="" class="icon-menu">
+          <span>Restauration</span>
+        </div>
+        <div routerLink="/meteo" [ngClass]="isRouteActive('/meteo') ? theme.menuActifs : ''" *ngIf="panelServiceOpen" class="item-param-accordion ">
+          <img [src]="isRouteActive('/meteo') ? 'assets/icon/blanc/meteo.svg' : 'assets/icon/noir/meteo.svg'"  alt="" class="icon-menu">
+          <span>Meteo</span>
+        </div>
+        <div routerLink="/transport" [ngClass]="isRouteActive('/transport') ? theme.menuActifs : ''" *ngIf="panelServiceOpen" class="item-param-accordion ">
+          <img [src]="isRouteActive('/transport') ? 'assets/icon/blanc/transport.svg' : 'assets/icon/noir/transport.svg'"  alt="" class="icon-menu">
+          <span>Transport</span>
+        </div>
+
+        <div routerLink="/quartier" [ngClass]="isRouteActive('/quartier') ? theme.menuActifs : ''" *ngIf="panelServiceOpen && theme.color == 'pmu-color'" class="item-param-accordion ">
+          <img [src]="isRouteActive('/quartier') ? 'assets/icon/blanc/quartier.png' : 'assets/icon/noir/quartier.png'"  alt="" class="icon-menu">
+          <span>Le Quartier</span>
+        </div>
+
+        <div routerLink="/intranet" [ngClass]="isRouteActive('/intranet') ? theme.menuActifs : ''" *ngIf="panelServiceOpen && theme.color == 'pmu-color'" class="item-param-accordion ">
+          <img [src]="isRouteActive('/intranet') ? 'assets/icon/blanc/intranet.png' : 'assets/icon/noir/intranet.png'"  alt="" class="icon-menu">
+          <span>Intranet PMU</span>
+        </div>
+
+        <div routerLink="/cse" [ngClass]="isRouteActive('/cse') ? theme.menuActifs : ''" *ngIf="panelServiceOpen && theme.color == 'pmu-color'" class="item-param-accordion ">
+          <img [src]="isRouteActive('/cse') ? 'assets/icon/blanc/cse.png' : 'assets/icon/noir/cse.png'"  alt="" class="icon-menu">
+          <span>CSE</span>
+        </div>
+      </div>
+
+
+      <div routerLink="/cartographie" [ngClass]="isRouteActive('/cartographie') ? theme.menuActifs : ''" [class]="' item-menu'">
+        <img [src]="isRouteActive('/cartographie') ? 'assets/icon/blanc/cartographie.svg' : 'assets/icon/noir/cartographie.svg'"  alt="" class="icon-menu">
+        <span>Cartographie</span>
+      </div>
+
+
+    </div>
+    <div  [class]="stylePosition+' part-param'">
+      <div [class]="hPanel+' my-expansion'" >
+        <div class="expan-header" (click)="onExpansion()">
+          <!--<img src="assets/icon/profil.png" alt="" class="icon-profil">-->
+          <div [class]="theme.bgColor+' initialProfil'">
+            <span>{{premiereLettre(infoUser.firstname)}}</span>
+          </div>
+          <span>{{ infoUser.firstname ? infoUser.firstname+' '+infoUser.lastname : 'Utilisateur' }}</span>
+          <img [src]="'assets/icon/'+iconArrow" alt="" class="icon-arrow">
+        </div>
+        <div *ngIf="panelOpen" class="info-user first-accordion">
+          <div class="item-i-u">
+            <img src="assets/icon/organisation.png" alt="">
+            <span>{{ infoUser.organization.name }}</span>
+          </div>
+          <div class="item-i-u">
+            <img src="assets/icon/admin.png" alt="">
+            <span>{{ infoUser.role_description }}</span>
+          </div>
+          <div class="item-i-u">
+            <img src="assets/icon/mail.png" alt="">
+            <span>{{ infoUser.email }}</span>
+          </div>
+        </div>
+
+        <div  *ngIf="panelOpen" class="item-param-accordion menu-grise">
+          <img src="assets/icon/noir/edit-user.svg" alt="" class="icon-menu">
+          <span>Editer le profil</span>
+        </div>
+        <div *ngIf="panelOpen" class="item-param-accordion " (click)="logout()">
+          <img src="assets/icon/noir/logout.svg" alt="" class="icon-menu">
+          <span>Se deconnecter</span>
+        </div>
+        <div *ngIf="panelOpen" class="item-param-accordion menu-grisex" (click)="showDesinscription()">
+          <img src="assets/icon/noir/logut2.svg" alt="" class="icon-menu">
+          <span>Se desinscrire</span>
+        </div>
+      </div>
+      <div [class]="hSupport+' my-expansion'" >
+        <div class="expan-header" (click)="onExpansionSupport()">
+          <img src="assets/icon/support.png" alt="" class="icon-profil">
+          <span>Support</span>
+          <img [src]="'assets/icon/'+iconArrowSupport" alt="" class="icon-arrow">
+        </div>
+        <div *ngIf="panelSupport" class="info-user first-accordion">
+          <div class="item-i-u">
+            <img src="assets/icon/organisation.png" alt="">
+            <span>Iviplay</span>
+          </div>
+          <div class="item-i-u">
+            <img src="assets/icon/admin.png" alt="">
+            <span>Support</span>
+          </div>
+          <div class="item-i-u">
+            <img src="assets/icon/mail.png" alt="">
+            <span>support@iviplay.com</span>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div routerLink="/parametres" [ngClass]="isRouteActive('/parametres') ? theme.menuActifs : ''" class="item-param">
+        <img [src]="isRouteActive('/parametres') ? 'assets/icon/blanc/setting.svg' : 'assets/icon/noir/parametre.svg'" alt="" class="icon-menu">
+        <span>Parametres</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="popup-edit-user" *ngIf="isEdit">
+  <div class="card-edit-user">
+    <div class="header-haut">
+      <span>Edition du profil</span>
+      <img src="assets/icon/noir/close.png" (click)="closeEdit()">
+    </div>
+
+    <div class="card-form">
+        <div [class]="theme.bgColor+' circle-photo'" *ngIf="hasPhoto">
+          <span>LD</span>
+          <div class="opt-cam">
+            <img src="assets/icon/camera.png" alt="">
+          </div>
+        </div>
+      <div class="circle-photo">
+        <img class="photo-c"  [src]="seletedImg" alt="">
+        <div class="opt-cam">
+          <img src="assets/icon/camera.png" alt="" (click)="inputIm.click()">
+        </div>
+      </div>
+      <input [(ngModel)]="champImg" #inputIm type="file" [hidden]="true" (change)="getImageFile($event)">
+      <div class="card-forms">
+        <div class="form-grp">
+          <img src="assets/icon/edit/user.png" alt="">
+          <div class="grp">
+            <span>Prénom</span>
+            <input [(ngModel)]="editUser.firstname" type="text" placeholder="Prénom">
+          </div>
+        </div>
+
+        <div class="form-grp">
+          <img src="assets/icon/edit/user.png" alt="">
+          <div class="grp">
+            <span>Nom</span>
+            <input [(ngModel)]="editUser.lastname" type="text" placeholder="Nom">
+          </div>
+        </div>
+
+        <div class="form-grp">
+          <img src="assets/icon/edit/mail.png" alt="">
+          <div class="grp">
+            <span>Email</span>
+            <input [(ngModel)]="editUser.email" type="email" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="spc-btn">
+          <button [class]="theme.borderColor+' '+theme.color" (click)="closeEdit()">Annuler</button>
+          <button [class]="theme.bgColor" (click)="sendEditUser()">Enregistrer</button>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+</div>
+
+<div class="popup-chargement" *ngIf="isLoading">
+  <div class="loader" >
+    <span>Chargement</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+  </div>
+</div>
+<div class="popup-toast" *ngIf="isSucces || isError">
+  <div class="card-toast" *ngIf="isSucces">
+    <div class="cd-type succes">
+      <img src="assets/icon/toast/success.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-succes">Succès</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+
+  <div class="card-toast" *ngIf="isError">
+    <div class="cd-type error">
+      <img src="assets/icon/toast/error.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-error">Erreur</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+</div>
+
+<div class="popup-delete" *ngIf="isDeleting">
+  <div class="circle-close" (click)="closeDelete()">
+    <img src="assets/icon/noir/close.png" alt="">
+  </div>
+  <div class="card-delete">
+    <img src="assets/icon/noir/logut2.svg" alt="">
+    <span class="confirm">Confirmation</span>
+    <span class="little">Voullez vous vraiment vous désinscrire ?</span>
+    <button (click)="desinscrire()" [class]="theme.bgColor+' btn'">Confirmer</button>
+  </div>
+</div>

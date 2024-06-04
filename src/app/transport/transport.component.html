@@ -1,0 +1,272 @@
+<div class="page-generale">
+  <app-menu></app-menu>
+  <div class="container">
+    <div class="header-top">
+      <span class="title-service">Transport</span>
+      <div class="container-search-meteo" *ngIf="isInput1">
+        <div class="part-input-search" *ngIf="!isHistory">
+          <mat-icon  class="icon-password" fontSet="material-icons-outlined">search</mat-icon>
+          <input #villes (input)="myAutoMapComplete(villes, 'input1')" [(ngModel)]="ville"  placeholder="Choisir une destination..."  >
+          <img (click)="deleteInputSearch()" *ngIf="ville.length > 0" class="icon-close" src="assets/icon/transport/init.png" alt="">
+          <!--<mat-icon (click)="deleteInputSearch()" *ngIf="ville.length > 0"  class="icon-close" fontSet="material-icons-outlined">close</mat-icon>-->
+        </div>
+        <div class="popup-search" *ngIf="isSearch">
+          <span (click)="chooseSearch(itemVille)"  *ngFor="let itemVille of suggestionVilles">{{ itemVille.description }}</span>
+        </div>
+      </div>
+
+      <div class="container-search-meteo" *ngIf="!isInput1">
+        <div class="part-input-search" *ngIf="!isHistory">
+          <mat-icon  class="icon-password" fontSet="material-icons-outlined">search</mat-icon>
+          <input #villes2 (input)="myAutoMapComplete(villes2, 'input2')" [(ngModel)]="ville2"  placeholder="Choisir un point de départ..."  >
+          <mat-icon (click)="deleteInputSearch()" *ngIf="ville2.length > 0"  class="icon-close" fontSet="material-icons-outlined">close</mat-icon>
+        </div>
+        <div class="popup-search" *ngIf="isSearch2">
+          <span (click)="chooseSearch2(itemVille)"  *ngFor="let itemVille of suggestionVilles">{{ itemVille.description }}</span>
+        </div>
+      </div>
+
+      <div class="info-user">
+        <!--<div class="notif">
+          <img src="assets/icon/notification.png" alt="">
+          <span [class]="theme.bgColor+' counter-notif'">11</span>
+        </div>-->
+        <img (click)="showHistorique()" [src]="'assets/icon/'+getIconsHistory(isHistory)"  alt="">
+        <img (click)="showSupp()" src="assets/icon/support.png" alt="">
+      </div>
+    </div>
+    <div class="content-dashbord"  [hidden]="isHistory">
+      <div class="option-on-top">
+        <div [class]="theme.bgColor+' item-option-on-left'" (click)="showPopupChoose()">
+          <img src="assets/icon/itineraire.png" alt="">
+          <span >Creer un itineraire</span>
+        </div>
+      </div>
+      <div class="carte-map" id="map" >
+
+      </div>
+
+      <div class="bottomSheat" *ngIf="isTransport">
+        <mat-icon (click)="deleteInputSearch()"   class="icon-close-tr" fontSet="material-icons-outlined">close</mat-icon>
+        <table class="table-principal" >
+          <thead class="tr-table">
+          <tr>
+            <th class="th-table th-icon">
+              <div>
+
+              </div>
+            </th>
+            <th class="th-table">
+              <div>
+                <span>Moyen</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table">
+              <div>
+                <span>Duree</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table">
+              <div>
+                <span>Distance</span>
+                <img src="assets/icon/tree.png" alt="">
+              </div>
+            </th>
+            <th class="th-table th-action">
+              <div>
+
+              </div>
+            </th>
+
+          </tr>
+          </thead>
+
+          <tbody>
+          <tr   class="tr-table" *ngFor="let item of transports; index as i">
+            <td  class="td-table th-icon"><img [src]="'assets/icon/transport/'+item.icon+'.png'" alt=""></td>
+            <td  class="td-table">{{item.moyen}}</td>
+            <td  class="td-table">{{getDuration(item.travel)}}</td>
+            <td  class="td-table">{{getDistance(item.travel)}}</td>
+            <td  class="td-table th-action">
+              <div class="td-action">
+                <img (click)="openMap(item.travel)"  src="assets/icon/transport/localisation.png" alt="">
+                <img (click)="addToFavoris(i)" [src]="'assets/icon/transport/'+getIconFavoris(item.favoris)" alt="">
+              </div>
+            </td>
+          </tr>
+
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+
+    <div class="content-dashbord" *ngIf="isHistory">
+      <div class="option-on-top">
+        <div [class]="theme.bgColor+' item-option-on-left'" (click)="exportexcel()">
+          <img src="assets/icon/blanc/export.png" alt="">
+          <span>Exporter la liste</span>
+        </div>
+      </div>
+
+      <table class="table-principal" id="excel-table" style="margin-top: 96px !important;">
+        <thead class="tr-table">
+        <tr>
+          <th class="th-table th-icon">
+            <div>
+
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Depart</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Arrivee</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table th-small">
+            <div>
+              <span>Moyen</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table th-small">
+            <div>
+              <span>Duree</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table th-small">
+            <div>
+              <span>Distance</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Date</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table th-action">
+            <div>
+
+            </div>
+          </th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr   class="tr-table" *ngFor="let item of histos | paginate: { itemsPerPage: itemParPage, currentPage: p }; index as i">
+          <td  class="td-table th-icon"><img [src]="'assets/icon/transport/'+item.icon+'.png'" alt=""></td>
+          <td  class="td-table">{{item.depart}}</td>
+          <td  class="td-table">{{item.arrivee}}</td>
+          <td  class="td-table th-small">{{item.moyen}}</td>
+          <td  class="td-table th-small">{{item.duree}}</td>
+          <td  class="td-table th-small">{{item.distance}}</td>
+          <td  class="td-table">{{item.date | date: 'E dd MMMM yyyy HH:mm'}}</td>
+          <td  class="td-table th-action">
+            <div class="td-action">
+              <img (click)="deleteHisto(i)"  src="assets/icon/meteo/delete.png" alt="">
+            </div>
+          </td>
+        </tr>
+
+        </tbody>
+
+      </table>
+      <div class="tr-paginator">
+        <div class="option-on-bottom">
+          <span>{{total}} Elements</span>
+          <div class="my-paginator">
+            <img src="assets/icon/tableau/first-page.png" alt="" (click)="changePage(1)">
+            <img src="assets/icon/tableau/precedent.png" alt="" (click)="changePage(p-1)">
+            <div class="list-page">
+              <span [class.actif-li]="p == i+1"  (click)="changePage(i+1)" *ngFor="let index of [].constructor(nombrePage); let i = index">{{ i + 1 }}</span>
+
+            </div>
+            <img src="assets/icon/tableau/suivant.png" alt="" (click)="changePage(p+1)">
+            <img src="assets/icon/tableau/last-page.png" alt="" (click)="changePage(nombrePage)">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="popup-transp" *ngIf="isPopupChoose">
+  <div class="circle-close" (click)="closePopup()">
+    <img src="assets/icon/noir/close.png" alt="">
+  </div>
+  <div class="card-transp">
+    <div class="titre-transp">
+      <img src="assets/icon/transport/itineraire.png" alt="">
+      <span>Creer un itineraire</span>
+    </div>
+    Veuillez choisir votre position de depart
+    <div [class]="theme.bgColor+' option-transp'" (click)="reservDescript()">
+      <img src="assets/icon/transport/position.png" alt="">
+      Ma position actuelle
+    </div>
+
+    <div [class]="theme.borderColor+' option-transp '+theme.color" (click)="showInput2()">
+      <img [src]="urlTransp+'location.svg'" alt="">
+      Choisir un autre point de depart
+    </div>
+
+  </div>
+</div>
+<div class="popup-support" *ngIf="isSupport">
+  <div class="card-notification-act">
+    <div class="header-notif">
+      <span>Support</span>
+      <mat-icon (click)="showSupp()" class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="content-notif">
+      <div class="item-i-u">
+        <img src="assets/icon/organisation.png" alt="">
+        <span>Iviplay</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/admin.png" alt="">
+        <span>Support</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/mail.png" alt="">
+        <span>support@iviplay.com</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-toast" *ngIf="isSucces || isError">
+  <div class="card-toast" *ngIf="isSucces">
+    <div class="cd-type succes">
+      <img src="assets/icon/toast/success.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-succes">Succès</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+
+  <div class="card-toast" *ngIf="isError">
+    <div class="cd-type error">
+      <img src="assets/icon/toast/error.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-error">Erreur</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+</div>

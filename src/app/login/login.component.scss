@@ -1,0 +1,109 @@
+.form-idn{
+  width: 450px;
+  height: 580px;
+  margin-top: 100px;
+  .btn{
+    width: 85%;
+  }
+
+}
+
+.form-of-init{
+  height: 380px !important;
+}
+
+.popup-init-password{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.49);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+  .closer{
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-init{
+     background: #fff;
+    width: 450px;
+    height: 200px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+      .text-init{
+        font-weight: 700;
+        margin-top: 25px;
+      }
+    .form-grp{
+      width: calc(100% - 50px);
+      height: 65px;
+      border-radius: 8px;
+      background: #F6F6F6;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      padding-left: 10px;
+      .grp{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        input{
+          height: 30px;
+          width: 95% !important;
+          border: none;
+          background: none;
+          font-weight: 700;
+          font-size: 15px;
+        }
+        input:focus{
+          outline: none
+        }
+        span{
+          font-weight: 400;
+          font-size: 14px;
+          color: #4A4A4A;
+        }
+      }
+    }
+
+    button{
+      width: calc(100% - 50px);
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 25px;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.mybtnR{
+  margin-top: auto;
+}
+
+.myinfoR{
+  margin-bottom: 20px;
+}

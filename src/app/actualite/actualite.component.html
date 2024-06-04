@@ -1,0 +1,197 @@
+<div class="page-generale">
+  <app-menu></app-menu>
+  <div class="container">
+    <div class="header-top">
+      <span class="title-service">Fil d'actualite</span>
+     <!-- <div class="part-input-search">
+        <mat-icon  class="icon-password" fontSet="material-icons-outlined">search</mat-icon>
+        <input type="text" placeholder="Rechercher sur fil d'actualité...">
+      </div>-->
+      <div class="info-user">
+       <div class="notif">
+          <img src="assets/icon/notification.png" alt="" class="icon-grised">
+        </div>
+        <img src="assets/icon/historique.png" alt="" class="icon-grised">
+        <img (click)="showSupp()" src="assets/icon/support.png" alt="">
+      </div>
+    </div>
+    <div class="content-dashbord ">
+      <div [class]="theme.bgImage+' loader-srv'" *ngIf="isLoading">
+        <div class="loader" >
+          <span>Chargement</span>
+          <span class="dot">.</span>
+          <span class="dot">.</span>
+          <span class="dot">.</span>
+        </div>
+      </div>
+      <div class="content-actu" *ngIf="!isLoading">
+        <div [class]="theme.bgColor+' content-news favoris'">
+          <div class="type-news">
+            <img src="assets/icon/favoris.png" alt="">
+            <span>Favoris</span>
+          </div>
+          <div class="scroller-y">
+            <div class="empty-actu" *ngIf="favorites.length == 0">
+              <img src="assets/icon/empty.png" alt="">
+              <span>Vous n'avez aucune actualite en favoris</span>
+            </div>
+            <div class="card-news" *ngFor="let itemf of favorites, let indexf = index">
+              <div class="on-the-top">
+                <img  [class.icon-yammer]="itemf.profile.image"  [src]="itemf.profile.image ? itemf.profile.image : 'assets/icon/horse-news.png'" alt="">
+                <span>{{ itemf.name }}</span>
+              </div>
+              <div class="cardre-img">
+                <img src="{{ getImage(itemf) }}" alt="">
+              </div>
+              <div class="cadre-options">
+                <div class="part-liker">
+                  <img *ngIf="!itemf.likes.includes(idUser)" (click)="addToLike(itemf.id, indexf)" src="assets/icon/like.png" alt="">
+                  <img *ngIf="itemf.likes.includes(idUser)" (click)="removeToLike(itemf.id,indexf)" src="assets/icon/like-actif.png" alt="">
+                  <img (click)="openComment(itemf)" src="assets/icon/comment.png" alt="">
+                  <img class="no-pointer" src="assets/icon/actu/share-grise.svg" alt="" matTooltip="Pas disponible" matTooltipPosition="after">
+                </div>
+                <img (click)="removeToFavoris(itemf.id,indexf)" src="assets/icon/favoris-black.png" alt="">
+              </div>
+              <div class="part-text">
+                <span class="le-titre" [innerHTML]="itemf.desc"></span>
+                <p></p>
+              </div>
+              <div class="part-time">
+                <span>{{itemf.createdAt | relativeDate }}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="content-news">
+          <div class="type-news">
+            <img src="assets/icon/recent.png" alt="">
+            <span>Recents</span>
+          </div>
+          <div class="scroller-y">
+            <div class="card-news" *ngFor="let item of actualites, let index = index">
+              <div class="on-the-top">
+                <img [class.icon-yammer]="item.profile.image"  [src]="item.profile.image ? item.profile.image : 'assets/icon/horse-news.png'" alt="">
+                <span>{{ item.name }}</span>
+              </div>
+              <div class="cardre-img">
+                <img  src="{{ getImage(item) }}"  alt="">
+              </div>
+              <div class="cadre-options">
+                <div class="part-liker">
+                  <img *ngIf="!item.likes.includes(idUser)" (click)="addToLike(item.id, index)" src="assets/icon/like.png" alt="">
+                  <img *ngIf="item.likes.includes(idUser)" (click)="removeToLike(item.id)" src="assets/icon/like-actif.png" alt="">
+                  <img (click)="openComment(item)" src="assets/icon/comment.png" alt="">
+                  <img class="no-pointer" src="assets/icon/actu/share-grise.svg" alt="" matTooltip="Pas disponible" matTooltipPosition="after">
+                </div>
+                <img *ngIf="!item.favorites.includes(idUser)" (click)="addToFavoris(item.id, index)" src="assets/icon/favoris-outline.png" alt="">
+                <img *ngIf="item.favorites.includes(idUser)" (click)="removeToFavoris(item.id)" src="assets/icon/favoris-black.png" alt="">
+              </div>
+              <div class="part-text">
+                <span class="le-titre" [innerHTML]="item.desc"></span>
+                <p></p>
+                <!--<div class="actu-serviciel">
+                  <div class="item-serviciel">
+                    <img src="assets/icon/actu/service.png" alt="">
+                    <div class="item-texts">
+                      <span class="t-1">Servicielle</span>
+                      <span class="t-2">Votre catalogue de service</span>
+                    </div>
+                  </div>
+
+                  <div class="item-serviciel">
+                    <img src="assets/icon/actu/new.png" alt="">
+                    <div class="item-texts">
+                      <span class="t-1">Fil d'actualité</span>
+                      <span class="t-2">Vos informations en temps réel</span>
+                    </div>
+                  </div>
+
+                  <div class="item-serviciel">
+                    <img src="assets/icon/actu/localisation.png" alt="">
+                    <div class="item-texts">
+                      <span class="t-1">Cartographie</span>
+                      <span class="t-2">Vos services en proximité</span>
+                    </div>
+                  </div>
+                </div>-->
+              </div>
+              <div class="part-time">
+                <span>{{item.createdAt | relativeDate }}</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <!---->
+  </div>
+</div>
+
+<div class="popup-comment" *ngIf="isComment">
+  <div class="circle-close" (click)="closeComment()" >
+    <img src="assets/icon/noir/close.png" alt="">
+  </div>
+  <div class="card-comment">
+    <textarea #commt placeholder="Ajouter un commentaire"></textarea>
+    <div [class]="theme.bgColor+' add-btn'" (click)="addComment(commt)">
+      Envoyer
+    </div>
+    <div class="list-comment">
+      <div [class]="' item-comment'" *ngFor="let it of comments">
+        <span class="msg-com">{{it.message}}</span>
+        <div class="info-sf">
+          <small>Par: {{it.author.firstname+' '+it.author.lastname}}</small>
+          <small>{{it.createdAt | relativeDate}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-toast" *ngIf="isSucces || isError">
+  <div class="card-toast" *ngIf="isSucces">
+    <div class="cd-type succes">
+      <img src="assets/icon/toast/success.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-succes">Succes</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+
+  <div class="card-toast" *ngIf="isError">
+    <div class="cd-type error">
+      <img src="assets/icon/toast/error.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-error">Erreur</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+</div>
+<div class="popup-support" *ngIf="isSupport">
+  <div class="card-notification-act">
+    <div class="header-notif">
+      <span>Support</span>
+      <mat-icon (click)="showSupp()" class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="content-notif">
+      <div class="item-i-u">
+        <img src="assets/icon/organisation.png" alt="">
+        <span>Iviplay</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/admin.png" alt="">
+        <span>Support</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/mail.png" alt="">
+        <span>support@iviplay.com</span>
+      </div>
+    </div>
+  </div>
+</div>

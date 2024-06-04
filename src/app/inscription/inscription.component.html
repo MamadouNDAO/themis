@@ -1,0 +1,92 @@
+<div [class]="theme.bgImage+' page'">
+  <div class="loader" *ngIf="isLoading">
+    <span>Chargement</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+  </div>
+
+  <div [class]="theme.borderColor+' form-idn'" *ngIf="!isLoading">
+    <div [class]="theme.bgColor+' cadre-top-login'">
+      <img src="assets/images/white-icon-horse.png" alt="">
+      <span *ngIf="theme.color == 'sci-color'">Bienvenue</span>
+      <span *ngIf="theme.color == 'pmu-color'">PMU <small>& Moi</small></span>
+    </div>
+
+    <div class="part-title">
+      <span [class]="' title'">Inscription</span>
+      <span class="sub-title">Veuillez renseigner vos informations</span>
+    </div>
+    <div class="form-group">
+      <div  [class.actived]="isInputFocused" class="labels">Prénom</div>
+      <input [(ngModel)]="prenom" #input1 (focus)="onInputFocus('input1')" (blur)="onInputBlur(input1, 'input1')" type="text">
+    </div>
+    <div class="form-group">
+      <div  [class.actived]="isInputFocused3" class="labels">Nom</div>
+      <input [(ngModel)]="nom" #input3 (focus)="onInputFocus('input3')" (blur)="onInputBlur(input3, 'input4')" type="text">
+    </div>
+
+    <div class="form-group">
+      <div  [class.actived]="isInputFocused4" class="labels">Email</div>
+      <input [(ngModel)]="email" #input4 (focus)="onInputFocus('input4')" (blur)="onInputBlur(input4, 'input4')" type="email">
+    </div>
+
+    <div class="form-group">
+      <div  [class.actived]="isInput2Focused" class="labels">Mot de passe</div>
+      <input [(ngModel)]="password" #input2 (focus)="onInputFocus('input2')" (blur)="onInputBlur(input2, 'input2')" type="password">
+      <mat-icon (click)="showHidePassword(input2)" class="icon-password" fontSet="material-icons-outlined">{{nameIcone}}</mat-icon>
+    </div>
+
+    <button (click)="submit()" [class]="theme.bgColor+' btn'">Créer mon compte</button>
+    <div class="info-bottom info-bt-2">
+      <span>Vous avez déjà un compte?</span>
+      <span routerLink="/" [class]="theme.color+' link-text'">Connectez-vous</span>
+    </div>
+    <br>
+  </div>
+</div>
+
+<div class="popup-support" *ngIf="isSupport">
+  <div class="card-notification-act">
+    <div class="header-notif">
+      <span>Support</span>
+      <mat-icon (click)="showSupp()" class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="content-notif">
+      <div class="item-i-u">
+        <img src="assets/icon/organisation.png" alt="">
+        <span>Iviplay</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/admin.png" alt="">
+        <span>Support</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/mail.png" alt="">
+        <span>support@iviplay.com</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-toast" *ngIf="isSucces || isError">
+  <div class="card-toast" *ngIf="isSucces">
+    <div class="cd-type succes">
+      <img src="assets/icon/toast/success.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-succes">Succès</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+
+  <div class="card-toast" *ngIf="isError">
+    <div class="cd-type error">
+      <img src="assets/icon/toast/error.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-error">Erreur</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+</div>

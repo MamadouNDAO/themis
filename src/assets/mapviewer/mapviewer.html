@@ -1,0 +1,312 @@
+<!doctype html>
+<html>
+<head>
+  <title>VisioWeb-UIkit</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="../media/favicon.png" />
+
+  <!-- UIkit JS/CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.1/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.1/dist/js/uikit-icons.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.1/dist/css/uikit.min.css" />
+
+  <!-- lodash -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+  <!-- VisioWeb Essential -->
+  <script type="text/javascript" src="./build/visioweb.js"></script>
+  <script type="text/javascript" src="./build/visioweb.essential.js"></script>
+  <link rel="stylesheet" href="css/visioglobe-icon.css"/>
+  <link rel="stylesheet" href="css/uikit.visioglobe.css"/>
+
+  <style>
+    #placeTitle {
+      font-size: 1rem !important;
+    }
+    #routeFrom {
+      font-size: 0.7rem !important;
+    }
+    #routeTo {
+      font-size: 0.7rem !important;
+    }
+    .uk-padding-small {
+      padding: 10px !important;
+    }
+
+    .my-popup {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgb(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      gap: 10px;
+    }
+    .content-popup {
+      width: 100%;
+      min-height: 219px;
+      background: #fff;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 15px;
+      align-items: center;
+      position: absolute;
+      bottom: 0;
+      z-index: 5000;
+    }
+
+    .list-action{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .content-popup button{
+      padding: 10px;
+      background: #fff;
+      color: #333;
+      border: none;
+      width: 177px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-family: 'Century Gothic', sans-serif;
+    }
+
+
+
+    #NameRoom{
+      font-family: 'Century Gothic', sans-serif;
+      font-size: 20px;
+      color: #333;
+      font-weight: 700;
+    }
+
+    .text-inform{
+      font-family: 'Century Gothic', sans-serif;
+    }
+
+    .popup-carto{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.49);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .circle-close{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .content-popup-carto{
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      padding: 15px;
+    }
+
+    .my-btn{
+      border: none;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #F9F9F9;
+      cursor: pointer;
+    }
+
+  </style>
+
+  <script type="text/javascript" src="js/floor37.js"></script>
+  <script type="text/javascript" src="js/mapviewer.js"></script>
+</head>
+<body>
+<!--
+<img id="img" width="22" height="22"
+     src="./marker_position.png" style="z-index: 9999; position: absolute;top: 50%;left: 50%"  />
+ -->
+
+
+<nav id="navbar" class="uk-navbar-container" uk-navbar>
+  <div class="uk-navbar-left">
+    <ul class="uk-navbar-nav">
+      <li id="global_button" style="display: none">
+        <a href="#">
+          <div class="uk-icon-button visioglobe-icon visio-global" style="font-size: 24px"></div>
+        </a>
+      </li>
+      <li id="building_selector" style="display: none">
+        <a href="#">
+          <div class="uk-icon visioglobe-icon visio-building" style="font-size: 24px"></div>
+          <span id="buildingName" style="padding-left: 8px;"></span>
+        </a>
+        <div id="buildings" class="uk-navbar-dropdown uk-padding-small uk-margin-remove">
+          <ul class="uk-nav uk-navbar-dropdown-nav"></ul>
+        </div>
+      </li>
+      <li id="floor_selector" >
+        <a href="#">
+          <div class="uk-icon visioglobe-icon visio-floor" style="font-size: 24px"></div>
+          <span id="floorName" style="padding-left: 8px;"></span>
+        </a>
+        <div id="floors" class="uk-navbar-dropdown uk-padding-small uk-margin-remove">
+          <ul class="uk-nav uk-navbar-dropdown-nav"></ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="uk-navbar-right">
+    <a class="uk-navbar-toggle uk-padding uk-padding-remove-vertical" uk-search-icon uk-toggle="target: #searchPanel"></a>
+  </div>
+</nav>
+
+
+<!-- mapviewer's container -->
+
+<div id="container" class="uk-container uk-container-expand uk-position-relative uk-padding-remove" uk-height-viewport="expand:true">
+</div>
+<!-- search panel -->
+<div id="searchPanel" uk-offcanvas="flip:true;overlay:false;" class="uk-width-1-3">
+  <div class="uk-offcanvas-bar uk-width-1-1 uk-background-default uk-overflow-hidden uk-flex uk-flex-column">
+    <a id="closePanel" href="#" class="uk-icon-button uk-float-left" uk-icon="chevron-right" style="font-size: 24px; min-height: 36px;"></a>
+    <div class="uk-margin-medium uk-margin-remove-bottom uk-flex uk-flex-middle">
+      <form class="uk-search uk-search-default uk-width-expand" autocomplete="off">
+        <span class="uk-search-icon-flip" uk-search-icon></span>
+        <input id="searchInput" class="uk-search-input" type="search" placeholder="Rechercher">
+      </form>
+      <a id="clearSearch" href="#" class="uk-padding-small" uk-icon="close" style="font-size: 24px;"></a>
+    </div>
+    <ul id="searchTabs" class="uk-flex-center" uk-tab>
+      <li class="uk-active">
+        <a href="#">
+          <span id="categoriesTabName"></span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <span id="placesTabName"></span>
+          <span id="resetCategory" uk-icon="icon: close" style="width: 16px; display: none;"></span>
+        </a>
+      </li>
+    </ul>
+    <ul class="uk-switcher" style="overflow-y: auto;">
+      <ul id="categoryList" class="uk-list uk-margin-remove">
+      </ul>
+      <ul id="placeList" class="uk-list uk-margin-remove">
+      </ul>
+    </ul>
+  </div>
+</div>
+<!-- progress bar -->
+<div class="uk-overlay uk-position-center">
+  <progress id="loadProgress" style="width: 50vw;" class="uk-progress" value="0" max="1"></progress>
+</div>
+<!-- place bubble -->
+
+<div id="bubble" style="display: none">
+  <div class="uk-card-header uk-padding-small">
+    <img id="placeIcon"
+         class="uk-position-absolute uk-position-top-left uk-margin-small-top uk-margin-small-left" width="128" height="128" uk-img
+        style="left: 37%;top: 1px;" src="marker-grey.png" />
+  </div>
+</div>
+<div id="mybuble"
+     style="position: absolute; bottom: 1px; z-index: 9999; width: 100%; height: 100px; background-color: white; display: none">
+  <div class="uk-card-header uk-padding-small">
+    <h3 id="placeTitle" class="uk-card-title uk-margin-remove uk-text-center uk-text-middle uk-text-truncate"></h3>
+    <a id="closeBubble" href="#" class="uk-position-absolute uk-position-top-right uk-padding-small" uk-icon="close" style="font-size: 24px;"></a>
+  </div>
+  <div class="uk-card-body uk-height-max-small uk-overflow-auto uk-padding-small uk-margin-small-left uk-margin-small-right">
+    <p id="placeDescription" class="uk-text-break"></p>
+  </div>
+  <div class="uk-grid-small uk-flex-center uk-padding-small" uk-grid>
+    <div>
+      <button id="routeFrom" class="uk-button-primary"></button>
+    </div>
+    <div>
+      <button id="routeTo" class="uk-button-primary"></button>
+    </div>
+  </div>
+</div>
+
+<div id="my-pop-serv" class="popup-carto" style="display: none">
+  <div class="circle-close" id="closeBottom">
+    <img src="../icon/noir/close.png" alt="">
+  </div>
+  <div class="content-popup-carto">
+    <img src="../icon/tableau/noir/localisation.png" alt="">
+    <span id="NameRoom">Bridge</span>
+    <span id="etatSalle" class="text-inform">La salle est disponible à la réservation mais actuellement occupée</span>
+    <div class="list-action">
+      <button class="my-btn" id="btnReserver">
+        <img src="../icon/tableau/noir/calendar.png" alt="">
+        <span>Réserver</span>
+      </button>
+      <button class="my-btn" id="btnConstat">
+        <img src="../icon/noir/incident.svg" alt="">
+        <span>Déclarer un incident</span>
+      </button>
+      <button class="my-btn" id="btnDeplacer">
+        <img src="../icon/noir/direction.png" alt="">
+        <span>Se diriger</span>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- navigation -->
+<div id="navigation" class="uk-card uk-card-default uk-width-large uk-height-max-medium uk-position-medium uk-position-bottom-center" style="display: none;">
+  <div class="uk-card-body uk-height-max-small uk-overflow-auto uk-padding-small uk-margin-small-left uk-margin-small-right">
+    <div class="uk-grid-small uk-flex-middle" uk-grid>
+      <div class="uk-width-auto">
+        <img id="instructionIcon" width="42" height="42" uk-img>
+      </div>
+      <div class="uk-width-expand">
+        <h5 id="instructionBrief" class="uk-margin-remove-bottom"></h5>
+        <p id="instructionDetail" class="uk-text-break uk-margin-remove-top" style="font-size: x-small"></p>
+      </div>
+    </div>
+  </div>
+  <div class="uk-grid-small uk-flex-center uk-padding-small" uk-grid>
+    <div>
+      <button id="prevInstruction" class="uk-button-primary">←</button>
+    </div>
+    <div>
+      <button id="nextInstruction" class="uk-button-primary">→</button>
+    </div>
+    <div>
+      <button id="clearRoute" class="uk-button-primary">X</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

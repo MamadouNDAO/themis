@@ -1,0 +1,37 @@
+.page-generale{
+  overflow-y: auto;
+}
+
+.option-on-top{
+  position: fixed;
+  width: calc(100% - 320px) !important;
+  left: 300px;
+  background: #fff;
+  top: 75px;
+}
+
+.table-principal{
+  margin-top: 80px !important;
+}
+
+.item-metric{
+  width: 100%;
+}
+
+.page-generale::-webkit-scrollbar{
+  width: 0.5rem;
+}
+.page-generale::-webkit-scrollbar-track {
+  background: none;
+}
+.scroll-pmu::-webkit-scrollbar-thumb {
+  background-color: var(--pmu-color) ;
+  border-radius: 6px;
+  border: none;
+}
+
+.scroll-sci::-webkit-scrollbar-thumb {
+  background-color: var(--sci-color) ;
+  border-radius: 6px;
+  border: none;
+}

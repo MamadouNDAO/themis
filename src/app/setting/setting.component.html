@@ -1,0 +1,100 @@
+<div class="page-generale">
+  <app-menu></app-menu>
+  <div class="container">
+    <div class="header-top">
+      <span class="title-service">Parametres</span>
+     <!-- <div class="part-input-search">
+        <mat-icon  class="icon-password" fontSet="material-icons-outlined">search</mat-icon>
+        <input type="text" placeholder="Choisir une destination...">
+      </div>-->
+      <div class="info-user">
+        <div class="notif">
+          <img src="assets/icon/notification.png" alt="" class="icon-grised">
+        </div>
+        <img src="assets/icon/historique.png" alt="" class="icon-grised">
+        <img (click)="showSupp()" src="assets/icon/support.png" alt="">
+      </div>
+    </div>
+    <div class="content-dashbord">
+
+      <table class="table-principal">
+        <thead class="tr-table">
+        <tr>
+          <th class="th-table th-icon">
+            <div>
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Type</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Domaine</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table th-descriptif">
+            <div>
+              <span>Descriptif</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Parametres</span>
+            </div>
+          </th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr  [ngClass]="item.label == 'Météo' ? 'td-grise' : ''" class="tr-table" *ngFor="let item of settings; index as i">
+          <ng-container *ngIf="item.haveNotification">
+
+          <td  class="td-table  th-icon"><img src="assets/icon/notification.png" alt=""></td>
+          <td  class="td-table ">Notification</td>
+          <td  class="td-table ">{{item.label == 'Déclarer un incident' ? 'Incidents' : item.label}}</td>
+          <td  class="td-table  th-descriptif">{{getDesc(item)}}</td>
+         <!-- <td *ngIf="item.type == 'Paramétres'"  class="td-table">{{item.value}}</td>-->
+          <td   class="td-table "><img [ngClass]="item.label == 'Météo' ? 'grised' :  ''" (click)="item.label == 'Météo' ? noAction() : toggleItem(i)" class="icon-toggle"  [src]="item.stateNotification ? 'assets/icon/toggle-on.png' : 'assets/icon/toggle-off.png'" alt=""></td>
+          </ng-container>
+        </tr>
+
+        </tbody>
+
+      </table>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+
+<div class="popup-support" *ngIf="isSupport">
+  <div class="card-notification-act">
+    <div class="header-notif">
+      <span>Support</span>
+      <mat-icon (click)="showSupp()" class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="content-notif">
+      <div class="item-i-u">
+        <img src="assets/icon/organisation.png" alt="">
+        <span>Iviplay</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/admin.png" alt="">
+        <span>Support</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/mail.png" alt="">
+        <span>support@iviplay.com</span>
+      </div>
+    </div>
+  </div>
+</div>

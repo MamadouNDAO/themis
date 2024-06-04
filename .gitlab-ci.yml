@@ -1,0 +1,101 @@
+stages:
+#- test
+- build
+- deploy
+
+variables:
+  S3_BUCKET: dev-themis-newdesk.iviplay.io
+
+cache:
+  untracked: true
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
+
+
+build_desk:
+  stage: build
+  image: node:18.17
+  only:
+    - dev
+    - preprod
+    - prod
+  script:
+    - npm -v
+    - node --version
+    - npm install  
+    - npm install -g @angular/cli
+    - npm run build
+  artifacts:
+    paths:
+      - dist/themis
+    expire_in: 1 hour
+
+deploy-dev:
+  stage: deploy
+
+  # before_script:
+  #   - docker info
+  #   - docker login -u ${CI_REGISTRY_CUSTOM_USER} -p ${CI_REGISTRY_CUSTOM_PWD} $CI_REGISTRY
+
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  dependencies:
+    - build_desk
+  script:
+    - unset AWS_ACCESS_KEY_ID
+    - unset AWS_SECRET_ACCESS_KEY
+    - export AWS_ACCESS_KEY_ID=${ACCESS_ID}
+    - export AWS_SECRET_ACCESS_KEY=${ACCESS_SECRET}
+    - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+    - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+    - aws configure set region eu-west-3
+    - cd dist/themis && aws s3  sync . s3://dev-themis-newdesk.iviplay.io/
+  only:
+    - dev
+
+deploy-preprod:
+  stage: deploy
+
+  # before_script:
+  #   - docker info
+  #   - docker login -u ${CI_REGISTRY_CUSTOM_USER} -p ${CI_REGISTRY_CUSTOM_PWD} $CI_REGISTRY
+
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  dependencies:
+    - build_desk
+  script:
+    - unset AWS_ACCESS_KEY_ID
+    - unset AWS_SECRET_ACCESS_KEY
+    - export AWS_ACCESS_KEY_ID=${ACCESS_ID}
+    - export AWS_SECRET_ACCESS_KEY=${ACCESS_SECRET}
+    - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+    - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+    - aws configure set region eu-west-3
+    - aws s3 rm s3://dev-themis-newdesk.iviplay.io --recursive
+    - cd dist/themis && aws s3  sync . s3://dev-themis-newdesk.iviplay.io/
+
+  only:
+    - preprod
+#
+deploy-prod:
+  stage: deploy
+
+  # before_script:
+  #   - docker info
+  #   - docker login -u ${CI_REGISTRY_CUSTOM_USER} -p ${CI_REGISTRY_CUSTOM_PWD} $CI_REGISTRY
+
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  dependencies:
+    - build_desk
+  script:
+    - unset AWS_ACCESS_KEY_ID
+    - unset AWS_SECRET_ACCESS_KEY
+    - export AWS_ACCESS_KEY_ID=${ACCESS_ID}
+    - export AWS_SECRET_ACCESS_KEY=${ACCESS_SECRET}
+    - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+    - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+    - aws configure set region eu-west-3
+    - cd dist/themis && aws s3  sync . s3://themis-newdesk.iviplay.io/ --delete
+  only:
+    - prod
+  when: on_success

@@ -1,0 +1,101 @@
+<div [class]="theme.bgImage+' page'">
+  <div class="loader" *ngIf="isLoading">
+    <span>Chargement</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+  </div>
+
+  <div [class]="theme.borderColor+' form-idn'" *ngIf="!isLoading && !isReinit">
+    <div [class]="theme.bgColor+' cadre-top-login'">
+      <img src="assets/images/white-icon-horse.png" alt="">
+      <span *ngIf="theme.color == 'sci-color'">Bienvenue</span>
+      <span *ngIf="theme.color == 'pmu-color'">PMU <small>& Moi</small></span>
+    </div>
+
+    <div class="part-title">
+      <span [class]="' title'">Connexion</span>
+      <span class="sub-title">Veuillez renseigner vos informations</span>
+    </div>
+    <div class="form-group">
+      <div  [class.actived]="isInputFocused" class="labels">Votre identifiant</div>
+      <input [(ngModel)]="email" #input1 (focus)="onInputFocus('input1')" (blur)="onInputBlur(input1, 'input1')" type="text">
+    </div>
+    <div class="form-group">
+      <div  [class.actived]="isInput2Focused" class="labels">Mot de passe</div>
+      <input [(ngModel)]="password" #input2 (focus)="onInputFocus('input2')" (blur)="onInputBlur(input2, 'input2')" type="password">
+      <mat-icon (click)="showHidePassword(input2)" class="icon-password" fontSet="material-icons-outlined">{{nameIcone}}</mat-icon>
+    </div>
+    <div class="info-bottom">
+      <span>Mot de passe oublié?</span>
+      <span (click)="openReinit()" [class]="theme.color+' link-text'">Réinitialiser mon mot de passe</span>
+    </div>
+    <button (click)="loginClassic()" [class]="theme.bgColor+' btn'">Me connecter</button>
+    <div class="info-bottom info-bt-2">
+      <span>Pas encore de compte?</span>
+      <span routerLink="/inscription" [class]="theme.color+' link-text'">Créer mon compte</span>
+    </div>
+  </div>
+
+  <div [class]="theme.borderColor+' form-idn form-of-init'" *ngIf="!isLoading && isReinit">
+    <div [class]="theme.bgColor+' cadre-top-login'">
+      <img src="assets/images/white-icon-horse.png" alt="">
+      <span *ngIf="theme.color == 'sci-color'">Bienvenue</span>
+      <span *ngIf="theme.color == 'pmu-color'">PMU <small>& Moi</small></span>
+    </div>
+
+    <div class="part-title">
+      <span [class]="' title'">Réinitialisation de mot de passe</span>
+      <span class="sub-title">Veuillez renseigner vos informations</span>
+    </div>
+    <div class="form-group">
+      <div  [class.actived]="isInput3Focused" class="labels">Votre email</div>
+      <input [(ngModel)]="emailReset" #input3 (focus)="onInputFocus('input3')" (blur)="onInputBlur(input3, 'input3')" type="text">
+    </div>
+
+    <button (click)="sendEmail()" [class]="theme.bgColor+' btn mybtnR'">Valider</button>
+    <div class="info-bottom info-bt-2 myinfoR">
+      <span>Vous avez déjà un compte?</span>
+      <span (click)="closeReinit()" [class]="theme.color+' link-text'">Se connecter</span>
+    </div>
+  </div>
+</div>
+
+<div class="popup-toast" *ngIf="isSucces || isError">
+  <div class="card-toast" *ngIf="isSucces">
+    <div class="cd-type succes">
+      <img src="assets/icon/toast/success.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-succes">Succès</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+
+  <div class="card-toast" *ngIf="isError">
+    <div class="cd-type error">
+      <img src="assets/icon/toast/error.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-error">Erreur</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+</div>
+<!--<div class="popup-init-password">
+  <div class="closer">
+    <img src="assets/icon/noir/close.png" alt="">
+  </div>
+  <div class="card-init">
+    <span class="text-init">Réinitialisation de mot de passe</span>
+    <div class="form-grp">
+      <img src="assets/icon/edit/mail.png" alt="">
+      <div class="grp">
+        <span>Email</span>
+        <input [(ngModel)]="emailReset" type="email" placeholder="Email">
+      </div>
+    </div>
+
+    <button (click)="sendEmail()" [class]="theme.bgColor">Valider</button>
+  </div>
+</div>-->

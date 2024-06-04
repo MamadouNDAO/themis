@@ -1,0 +1,188 @@
+<div class="page-generale">
+  <app-menu></app-menu>
+  <div class="container">
+    <div class="header-top">
+      <span class="title-service">Incidents</span>
+      <!--<div class="part-input-search">
+        <mat-icon  class="icon-password" fontSet="material-icons-outlined">search</mat-icon>
+        <input type="text" placeholder="Recherche dans incidents...">
+      </div>-->
+      <div class="info-user">
+
+        <div class="notif" (click)="showNotif()">
+          <img src="assets/icon/notification.png" alt="">
+          <span *ngIf="nbNotif > 0" [class]="theme.bgColor+' counter-notif'">{{nbNotif}}</span>
+        </div>
+        <img (click)="showHistory()" [src]="'assets/icon/'+getIconHistory()" alt="">
+        <img (click)="showSupp()" src="assets/icon/support.png" alt="">
+      </div>
+    </div>
+    <div class="content-dashbord">
+      <div *ngIf="!isHistorique" class="form-incident">
+        <div class="part-form">
+          <div class="selector-img" (click)="inputIm.click()">
+            <img [class.cadred]="inputIm.value" [src]="seletedImg" alt="">
+            <span *ngIf="!inputIm.value">Importer une photo</span>
+          </div>
+          <input [(ngModel)]="champImg" #inputIm [hidden]="true" id="img-constat-input" name ="__img" type="file" (change)="getImageFile($event)" >
+          <div class="part-saisi-1">
+            <input [(ngModel)]="titleConstat" type="text" placeholder="Titre">
+            <div class="my-select">
+              <input [(ngModel)]="selectdSalle" (input)="filtre(esp)" #esp class="inputEspace" type="text" placeholder="Espace" [matAutocomplete]="autoP">
+              <mat-autocomplete #autoP="matAutocomplete" >
+                <mat-option *ngFor="let option of filteredValues" [value]="option" >
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+              <img src="assets/icon/icon-select.png" alt="">
+            </div>
+            <div class="my-select">
+              <input  [(ngModel)]="selectdPriority" #prio class="inputEspace" type="text" placeholder="Priorité" [matAutocomplete]="autoPRIO">
+              <mat-autocomplete #autoPRIO="matAutocomplete" >
+                <mat-option *ngFor="let option of priorityNames" [value]="option" >
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+              <img src="assets/icon/icon-select.png" alt="">
+            </div>
+            <div class="my-select">
+              <input [(ngModel)]="slectedDesti"  #des class="inputEspace" type="text" placeholder="Destinataire" [matAutocomplete]="autoD">
+              <mat-autocomplete #autoD="matAutocomplete" >
+                <mat-option *ngFor="let option of DestiName; let i = index " [value]="option" >
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+              <img src="assets/icon/icon-select.png" alt="">
+            </div>
+          </div>
+          <div class="part-saisi-2">
+            <textarea [(ngModel)]="desc" placeholder="Ajouter un commentaire"></textarea>
+          </div>
+        </div>
+        <button (click)="actionToConstat()" [class]="theme.bgColor+' btn'">Déclarer</button>
+      </div>
+      <div *ngIf="!isHistorique && !attachement" class="glisser"  >
+        <img src="assets/icon/glisser.png" alt="">
+        <span>Glisser/deposer votre piece jointe</span>
+        <input type="file" class="infile" (change)="getFile($event)">
+      </div>
+
+      <div *ngIf="!isHistorique && attachement" class="glisser"  >
+        <img src="assets/icon/glisser.png" alt="">
+        <div [class]="theme.bgColor+' chip-files'">
+          <span >{{attachement.name}}</span>
+          <div class="c-icon-close" (click)="removeAttachement()">
+            <img src="assets/icon/noir/close.png" alt="">
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="isHistorique" class="container-history">
+        <div class="list-histoqrique">
+          <div class="item-historique" *ngFor="let item of historiks">
+            <div class="cadre-img">
+              <img [src]="item.image && item.image != '' ? urlImageCst + item.image : 'assets/images/incident/no-image.png'" alt="">
+            </div>
+            <div class="part-info-incident">
+              <div class="contenu-text">
+                <span class="le-titre">{{item.title}}</span>
+              </div>
+
+              <div class="contenu-text">
+                <span>{{item.room.name}}</span>
+              </div>
+
+              <div class="contenu-text">
+                <span>{{item.status}}</span>
+              </div>
+
+              <div class="contenu-text">
+                <span>{{item.category ? item.category.name : ''}}</span>
+              </div>
+            </div>
+
+            <div class="last-parti">
+              <div class="contenu-text">
+                <p>{{item.description}}</p>
+              </div>
+              <div [class]="theme.bgColor+' contenu-text ctn-btn'">Ouvrir la piéce jointe</div>
+
+              <div class="contenu-text ctn-last">
+                <span>Numero de ticket : <strong>{{item.label}}</strong> </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div class="popup-chargement" *ngIf="isLoading">
+  <div class="loader" >
+    <span>Chargement</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+  </div>
+</div>
+<div class="popup-support" *ngIf="isSupport">
+ <div class="card-notification-act">
+   <div class="header-notif">
+     <span>Support</span>
+     <mat-icon (click)="showSupp()" class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+   </div>
+   <div class="content-notif">
+     <div class="item-i-u">
+       <img src="assets/icon/organisation.png" alt="">
+       <span>Iviplay</span>
+     </div>
+     <div class="item-i-u">
+       <img src="assets/icon/admin.png" alt="">
+       <span>Support</span>
+     </div>
+     <div class="item-i-u">
+       <img src="assets/icon/mail.png" alt="">
+       <span>support@iviplay.com</span>
+     </div>
+   </div>
+ </div>
+</div>
+<div class="popup-toast" *ngIf="isSucces || isError">
+  <div class="card-toast" *ngIf="isSucces">
+    <div class="cd-type succes">
+      <img src="assets/icon/toast/success.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-succes">Succès</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+
+  <div class="card-toast" *ngIf="isError">
+    <div class="cd-type error">
+      <img src="assets/icon/toast/error.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-error">Erreur</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+</div>
+<div *ngIf="isNotif" class="popup-notification">
+  <div class="card-notification ">
+    <div class="header-notif">
+      <span>Notifications</span>
+      <mat-icon (click)="showNotif()"  class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="content-notif">
+      <div class="text-notif" *ngFor="let nt of notifs | slice:0:5;">
+        <span>{{nt.label}}</span>
+        <small>{{ nt.date.toString() | relativeDate }}</small>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,488 @@
+<div [ngClass]="theme.color == 'pmu-color' ? 'scroll-pmu' : 'scroll-sci'"  class="page-generale">
+  <app-menu></app-menu>
+  <div class="container">
+    <div class="header-top">
+      <span class="title-service">Reservation</span>
+      <div class="part-input-search" *ngIf="!isHistory">
+        <mat-icon  class="icon-password" fontSet="material-icons-outlined">search</mat-icon>
+        <input #searcher (input)="searchSalle(searcher)" type="text" placeholder="Recherche de salle...">
+      </div>
+      <div class="info-user">
+
+        <div class="notif" (click)="showNotif()">
+          <img src="assets/icon/notification.png" alt="">
+          <span *ngIf="nbNotif > 0" [class]="theme.bgColor+' counter-notif'">{{nbNotif}}</span>
+        </div>
+        <img (click)="showHistorique()" [src]="'assets/icon/'+getIconsHistory(isHistory)" alt="">
+        <img (click)="showSupp()" src="assets/icon/support.png" alt="">
+      </div>
+    </div>
+    <div *ngIf="!isHistory" class="content-dashbord">
+      <div class="option-on-top">
+        <div class="item-option-on-left" (click)="exportexcel()">
+          <img src="assets/icon/export.png" alt="">
+          <span>Exporter la liste</span>
+        </div>
+
+        <div [class]="theme.bgColor+' item-option-on-right'">
+          <img src="assets/icon/blanc/add.svg" alt="">
+          <span (click)="ouvreReservation()">Reserver une salle ulterieurement</span>
+        </div>
+      </div>
+
+      <table class="table-principal" *ngIf="!isLoadingRoom" id="excel-table">
+        <thead class="tr-table">
+        <tr>
+          <th class="th-table">
+            <div>
+              <span>Nom</span>
+              <img src="assets/icon/tree.png" alt="" (click)="sortData('room')">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Etage</span>
+              <img src="assets/icon/tree.png" alt="" (click)="sortData('etage')">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Site</span>
+              <img src="assets/icon/tree.png" alt="" (click)="sortData('site')">
+            </div>
+          </th>
+          <!--<th class="th-table">
+            <div>
+              <span>Entité</span>
+              <img src="assets/icon/tree.png" alt="" (click)="sortData('entite')">
+            </div>
+          </th>-->
+          <th class="th-table">
+            <div>
+              <span>Capacite</span>
+              <img src="assets/icon/tree.png" alt="" (click)="sortData('capacite')">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Disponibilite</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table th-action">
+            <div>
+              <span>Action</span>
+            </div>
+          </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <ng-container *ngIf="!isFiltering">
+          <tr (click)="selectItem(i)" [ngClass]="item.selected ? theme.bgColor : ''"  class="tr-table" *ngFor="let item of sortedData | paginate: { itemsPerPage: itemParPage, currentPage: p }; index as i">
+            <td  class="td-table">{{item.name}}</td>
+            <td  class="td-table">{{renameEtage(item.floor.name)}}</td>
+            <td  class="td-table">{{item.site}}</td>
+            <td  class="td-table">{{item.zone.maximumCapacity}} personnes</td>
+            <td  class="td-table">{{item.reservationStatus.message}}</td>
+            <td  class="td-table th-action">
+              <div class="td-action ">
+                <img (click)="showInfo(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/incident.png' : 'assets/icon/tableau/noir/incident.png'" alt="">
+                <img (click)="goToMap(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/localisation.png' : 'assets/icon/tableau/noir/localisation.png'" alt="">
+                <img (click)="showImmediatReserv(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/calendar.png' : 'assets/icon/tableau/noir/calendar.png'" alt="">
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-container *ngIf="isFiltering">
+          <tr (click)="selectItem(i)" [ngClass]="item.selected ? theme.bgColor : ''"  class="tr-table" *ngFor="let item of filteredRoom | paginate: { itemsPerPage: itemParPage, currentPage: p }; index as i">
+            <td  class="td-table">{{item.name}}</td>
+            <td  class="td-table">{{renameEtage(item.floor.name)}}</td>
+            <td  class="td-table">{{item.site}}</td>
+            <td  class="td-table">{{item.zone.maximumCapacity}} personnes</td>
+            <td  class="td-table">{{item.reservationStatus.message}}</td>
+            <td  class="td-table th-action">
+              <div class="td-action ">
+                <img (click)="showInfo(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/incident.png' : 'assets/icon/tableau/noir/incident.png'" alt="">
+                <img (click)="goToMap(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/localisation.png' : 'assets/icon/tableau/noir/localisation.png'" alt="">
+                <img (click)="showImmediatReserv(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/calendar.png' : 'assets/icon/tableau/noir/calendar.png'" alt="">
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        </tbody>
+      </table>
+      <div class="tr-paginator">
+        <div class="option-on-bottom">
+          <span>{{total}} salles disponibles immédiatement</span>
+          <div class="my-paginator">
+            <img src="assets/icon/tableau/first-page.png" alt="" (click)="changePage(1)">
+            <img src="assets/icon/tableau/precedent.png" alt="" (click)="changePage(p-1)">
+            <div class="list-page">
+              <span [class.actif-li]="p == i+1"  (click)="changePage(i+1)" *ngFor="let index of [].constructor(nombrePage); let i = index">{{ i + 1 }}</span>
+
+            </div>
+            <img src="assets/icon/tableau/suivant.png" alt="" (click)="changePage(p+1)">
+            <img src="assets/icon/tableau/last-page.png" alt="" (click)="changePage(nombrePage)">
+          </div>
+        </div>
+
+      </div>
+      <br><br>
+    </div>
+    <div class="content-dashbord" *ngIf="isHistory">
+      <div class="my-tab-group">
+        <div [ngClass]="theme.color === 'pmu-color' ? 'borderBtmPmu' : 'borderBtmSci'" class="header-tab">
+          <div (click)="changeTabs('avenir')" [ngClass]="isAvenir ? theme.bgColor : ''" class="tab">A venir</div>
+          <div (click)="changeTabs('termine')" [ngClass]="!isAvenir ? theme.bgColor : ''" class="tab">Terminees</div>
+        </div>
+        <div class="content-tab" *ngIf="isAvenir">
+          <table *ngIf="histoEncours.length > 0" class="table-principal table-history">
+            <thead class="tr-table">
+            <tr>
+              <th class="th-table">
+                <div>
+                  <span>Nom</span>
+                  <img src="assets/icon/tree.png" alt="" >
+                </div>
+              </th>
+              <th class="th-table">
+                <div>
+                  <span>Date</span>
+                  <img src="assets/icon/tree.png" alt="" >
+                </div>
+              </th>
+              <th class="th-table">
+                <div>
+                  <span>Heure de debut</span>
+                  <img src="assets/icon/tree.png" alt="" >
+                </div>
+              </th>
+              <th class="th-table">
+                <div>
+                  <span>Heure de fin</span>
+                  <img src="assets/icon/tree.png" alt="" >
+                </div>
+              </th>
+              <th class="th-table">
+                <div>
+                  <span>Objet</span>
+                  <img src="assets/icon/tree.png" alt="">
+                </div>
+              </th>
+              <th class="th-table th-action">
+                <div>
+                  <span>Action</span>
+                </div>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr (click)="selectItem(i)" [ngClass]="item.selected ? theme.bgColor : ''"  class="tr-table" *ngFor="let item of histoEncours ; index as i">
+              <td  class="td-table">{{item.room.name}}</td>
+              <td  class="td-table">{{convertStringDateenDate(item.dateStart)}}</td>
+              <td  class="td-table">{{convertStringHour(item.dateStart)}}</td>
+              <td  class="td-table">{{convertStringHour(item.dateEnd)}}</td>
+              <td  class="td-table">{{item.subject}}</td>
+              <td  class="td-table th-action">
+                <div class="td-action ">
+                  <img  (click)="makeUpdateReservation(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/incident.png' : 'assets/icon/tableau/noir/incident.png'" alt="">
+                  <img (click)="goToMap2(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/localisation.png' : 'assets/icon/tableau/noir/localisation.png'" alt="">
+                  <img (click)="showDelete(item)" [src]="item.selected ? 'assets/icon/blanc/delete.png' : 'assets/icon/noir/delete.png'" alt="">
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="cont-empty-data" *ngIf="histoEncours.length == 0 && !isLoadingRoom">
+            <img src="assets/icon/tableau/noir/incident.png" alt="">
+            <span>Vous n'avez aucune reservation à venir!</span>
+          </div>
+          <div class="popup-delete" *ngIf="isDeleting">
+            <div class="circle-close" (click)="closeDelete()">
+              <img src="assets/icon/noir/close.png" alt="">
+            </div>
+            <div class="card-delete">
+              <img src="assets/icon/noir/delete.png" alt="">
+              <span class="confirm">Confirmation</span>
+              <span class="little">Voullez vousvraiment supprimer la reservation?</span>
+              <button (click)="makeSuppression()" [class]="theme.bgColor+' btn'">Confirmer</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-tab" *ngIf="!isAvenir">
+          <table class="table-principal table-history">
+            <thead class="tr-table">
+            <tr>
+              <th class="th-table">
+                <div>
+                  <span>Nom</span>
+                  <img src="assets/icon/tree.png" alt="" >
+                </div>
+              </th>
+              <th class="th-table">
+                <div>
+                  <span>Date</span>
+                  <img src="assets/icon/tree.png" alt="" >
+                </div>
+              </th>
+              <th class="th-table">
+                <div>
+                  <span>Heure de debut</span>
+                  <img src="assets/icon/tree.png" alt="" >
+                </div>
+              </th>
+              <th class="th-table">
+                <div>
+                  <span>Heure de fin</span>
+                  <img src="assets/icon/tree.png" alt="" >
+                </div>
+              </th>
+              <th class="th-table">
+                <div>
+                  <span>Objet</span>
+                  <img src="assets/icon/tree.png" alt="">
+                </div>
+              </th>
+              <th class="th-table th-action">
+                <div>
+                  <span>Action</span>
+                </div>
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr (click)="selectItem(i)" [ngClass]="item.selected ? theme.bgColor : ''"  class="tr-table" *ngFor="let item of histoTerminer | paginate: { itemsPerPage: itemParPage, currentPage: p } ; index as i">
+              <td  class="td-table">{{item.room.name}}</td>
+              <td  class="td-table">{{convertStringDateenDate(item.dateStart)}}</td>
+              <td  class="td-table">{{convertStringHour(item.dateStart)}}</td>
+              <td  class="td-table">{{convertStringHour(item.dateEnd)}}</td>
+              <td  class="td-table">{{item.subject}}</td>
+              <td  class="td-table th-action">
+                <div class="td-action ">
+                  <!--<img  [src]="item.selected ? 'assets/icon/tableau/blanc/incident.png' : 'assets/icon/tableau/noir/incident.png'" alt="">-->
+                  <img (click)="goToMap2(item)" [src]="item.selected ? 'assets/icon/tableau/blanc/localisation.png' : 'assets/icon/tableau/noir/localisation.png'" alt="">
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="tr-paginator">
+            <div class="option-on-bottom">
+              <span>{{total}} salles</span>
+              <div class="my-paginator">
+                <img src="assets/icon/tableau/first-page.png" alt="" (click)="changePage(1)">
+                <img src="assets/icon/tableau/precedent.png" alt="" (click)="changePage(p-1)">
+                <div class="list-page">
+                  <span [class.actif-li]="p == i+1"  (click)="changePage(i+1)" *ngFor="let index of [].constructor(nombrePage); let i = index">{{ i + 1 }}</span>
+
+                </div>
+                <img src="assets/icon/tableau/suivant.png" alt="" (click)="changePage(p+1)">
+                <img src="assets/icon/tableau/last-page.png" alt="" (click)="changePage(nombrePage)">
+              </div>
+            </div>
+
+          </div>
+          <br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isNotif" class="popup-notification">
+  <div class="card-notification ">
+  <div class="header-notif">
+    <span>Notifications</span>
+    <mat-icon (click)="showNotif()"  class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+  </div>
+    <div class="content-notif">
+      <div class="text-notif" *ngFor="let nt of notifs | slice:0:5;">
+        <span>{{nt.label}}</span>
+        <small>{{ nt.date.toString() | relativeDate }}</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-reservation" *ngIf="isReservation">
+  <div class="form-reservation">
+    <div class="header-form">
+      <span>Reservation de salle</span>
+      <mat-icon (click)="closeReservation()"  class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="center-form">
+      <input [(ngModel)]="nameRoom" #room (input)="filtreSalle(room)" type="text" placeholder="Nom de la salle" class="input-obj" [matAutocomplete]="autoSalle">
+      <mat-autocomplete #autoSalle="matAutocomplete" >
+        <mat-option *ngFor="let salle of suggestionSalle" [value]="salle" >
+          {{salle}}
+        </mat-option>
+      </mat-autocomplete>
+      <input type="text" placeholder="Objet" class="input-obj" [(ngModel)]="objet">
+      <div class="cadre-chips">
+        <div class="list-chips">
+          <div [class]="theme.bgColor+' item-email'" *ngFor="let item of participants; let i = index;">
+            <span>{{item}}</span>
+            <mat-icon (click)="removeItem(i)"  class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+          </div>
+
+        </div>
+        <input #Invites (input)="filtreEmail(Invites)" type="text" placeholder="Participants (saisissez les emails)" class="input-list" [matAutocomplete]="auto">
+
+      </div>
+      <mat-autocomplete #auto="matAutocomplete" >
+        <mat-option *ngFor="let option of suggestionEmails" [value]="option" (click)="addEmail(option, Invites)">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+
+
+      <div class="parti-date-heure">
+        <div class="p-1-date">
+
+            <mat-calendar [ngClass]="theme.color === 'pmu-color' ? 'pmu-calendar' : 'sci-calendar'"  [(selected)]="selected"></mat-calendar>
+
+        </div>
+        <div class="p-2-heure">
+          <div class="cadre-time">
+            <span>Heure de debut</span>
+            <div class="my-horloge">
+              <div class="selecteur-time">
+                <img (click)="upHour('debut')" class="curs-p" src="assets/icon/timer/up.png" alt="">
+                <span>{{ formatterItem(heureDebut) }}</span>
+                <img (click)="downHour('debut')" class="curs-p" src="assets/icon/timer/down.png" alt="">
+              </div>
+              <img src="assets/icon/timer/separateur.png" alt="">
+              <div class="selecteur-time">
+                <img (click)="upMinute('debut')" class="curs-p" src="assets/icon/timer/up.png" alt="">
+                <span>{{ formatterItem(minuteDebut) }}</span>
+                <img (click)="downMinute('debut')" class="curs-p" src="assets/icon/timer/down.png" alt="">
+              </div>
+            </div>
+          </div>
+
+          <div class="cadre-time mb-15">
+            <span>Heure de fin</span>
+            <div class="my-horloge">
+              <div class="selecteur-time">
+                <img (click)="upHour('fin')" class="curs-p" src="assets/icon/timer/up.png" alt="">
+                <span>{{ formatterItem(heureFin) }}</span>
+                <img (click)="downHour('fin')"  class="curs-p" src="assets/icon/timer/down.png" alt="">
+              </div>
+              <img src="assets/icon/timer/separateur.png" alt="">
+              <div class="selecteur-time">
+                <img (click)="upMinute('fin')" class="curs-p" src="assets/icon/timer/up.png" alt="">
+                <span>{{ formatterItem(minuteFin) }}</span>
+                <img (click)="downMinute('fin')"  class="curs-p" src="assets/icon/timer/down.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="loader" *ngIf="!isBtn">
+      <span>Chargement</span>
+      <span class="dot">.</span>
+      <span class="dot">.</span>
+      <span class="dot">.</span>
+    </div>
+    <div *ngIf="isBtn" (click)="makeReservation()" [class]="theme.bgColor+' btn-reserv'">Reserver la salle</div>
+  </div>
+</div>
+
+<div class="popup-delete-2" *ngIf="isInfoRoom">
+  <div class="circle-close" (click)="closeInfo()">
+    <img src="assets/icon/noir/close.png" alt="">
+  </div>
+  <div class="card-delete">
+    <img src="assets/icon/tableau/noir/incident.png" alt="">
+    <span class="confirm">{{oneRoom.name}}</span>
+    <div class="little-info-room">
+      <span>{{renameEtage(oneRoom.etage)}}</span>
+      <span>{{oneRoom.site}}</span>
+    </div>
+    <span class="little">Cette salle est reservable immédiatement</span>
+
+    <div class="les-btn">
+      <div class="item-btn" (click)="goToLocalise(oneRoom)">
+        <img src="assets/icon/tableau/noir/localisation.png" alt="">
+        <span>Localiser la salle</span>
+      </div>
+      <div class="item-btn" (click)="reservationImmediat()">
+        <img src="assets/icon/tableau/noir/calendar.png" alt="">
+        <span>Réserver immediatement la salle</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-delete-2" *ngIf="isImmediat">
+  <div class="circle-close" (click)="closeImmediat()">
+    <img src="assets/icon/noir/close.png" alt="">
+  </div>
+  <div class="card-delete">
+    <img src="assets/icon/tableau/noir/calendar.png" alt="">
+    <span class="confirm">{{oneRoom.name}}</span>
+
+    <span  class="little">Vous allez faire une réservation immediate de cette salle!</span>
+
+    <button (click)="reservationImmediat()" [class]="theme.bgColor+' btn'">Confirmer</button>
+  </div>
+</div>
+
+<div class="popup-chargement" *ngIf="isLoading || isLoadingRoom">
+  <div class="loader" >
+    <span>Chargement</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+    <span class="dot">.</span>
+  </div>
+</div>
+
+<div class="popup-toast" *ngIf="isSucces || isError">
+  <div class="card-toast" *ngIf="isSucces">
+    <div class="cd-type succes">
+      <img src="assets/icon/toast/success.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-succes">Succes</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+
+  <div class="card-toast" *ngIf="isError">
+    <div class="cd-type error">
+      <img src="assets/icon/toast/error.png" alt="">
+    </div>
+    <div class="right-part">
+      <span class="text-type txt-error">Erreur</span>
+      <span>{{text}}</span>
+    </div>
+  </div>
+</div>
+<div class="popup-support" *ngIf="isSupport">
+  <div class="card-notification-act">
+    <div class="header-notif">
+      <span>Support</span>
+      <mat-icon (click)="showSupp()" class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="content-notif">
+      <div class="item-i-u">
+        <img src="assets/icon/organisation.png" alt="">
+        <span>Iviplay</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/admin.png" alt="">
+        <span>Support</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/mail.png" alt="">
+        <span>support@iviplay.com</span>
+      </div>
+    </div>
+  </div>
+</div>

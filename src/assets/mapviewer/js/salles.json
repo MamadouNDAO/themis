@@ -1,0 +1,866 @@
+[
+  {
+    "id": "B1",
+    "name": "B1",
+    "categories": [],
+    "floor": "outside"
+  },
+  {
+    "id": "outside",
+    "name": "outside",
+    "categories": [],
+    "floor": "outside"
+  },
+  {
+    "id": "Conciergerie",
+    "name": "Conciergerie",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "PC Sécurité",
+    "name": "PC Sécurité",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Traitement courrier",
+    "name": "Traitement courrier",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Local",
+    "name": "Local",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "PC Sécurité Annexe",
+    "name": "PC Sécurité Annexe",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Accueil Tour Alto",
+    "name": "Accueil Tour Alto",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Cafétéria RDC",
+    "name": "Cafétéria RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "60d456d7136dbb00145a42b2",
+    "name": "60d456d7136dbb00145a42b2",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Toilettes 3 RDC",
+    "name": "Toilettes 3 RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Toilettes 4 RDC",
+    "name": "Toilettes 4 RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "60f5b2a54a41350014cb1c27",
+    "name": "60f5b2a54a41350014cb1c27",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Escalator RDC",
+    "name": "Escalator RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "60fe68b6b7f68e0023654b8a",
+    "name": "60fe68b6b7f68e0023654b8a",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "5d39d204c888e3002c3c8e8b",
+    "name": "5d39d204c888e3002c3c8e8b",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Escalier 3 RDC",
+    "name": "Escalier 3 RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "ASC E RDC",
+    "name": "ASC E RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Escalators RDC",
+    "name": "Escalators RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Toilettes 2 RDC",
+    "name": "Toilettes 2 RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Toilettes 1 RDC",
+    "name": "Toilettes 1 RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Escalier 2 RDC",
+    "name": "Escalier 2 RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Escalier 1 RDC",
+    "name": "Escalier 1 RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "ASC F RDC",
+    "name": "ASC F RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "ASC G RDC",
+    "name": "ASC G RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "ASC H RDC",
+    "name": "ASC H RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "ASC A RDC",
+    "name": "ASC A RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "ASC B RDC",
+    "name": "ASC B RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "ASC C RDC",
+    "name": "ASC C RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "ASC D RDC",
+    "name": "ASC D RDC",
+    "categories": [],
+    "floor": "B1-UL0"
+  },
+  {
+    "id": "Restaurant E1",
+    "name": "Restaurant E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Accueil E1",
+    "name": "Accueil E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Escalier 2 E1",
+    "name": "Escalier 2 E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Escalator 1 E1",
+    "name": "Escalator 1 E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Escalier 3 E1",
+    "name": "Escalier 3 E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Escalier 4 E1",
+    "name": "Escalier 4 E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Escalator 2 E1",
+    "name": "Escalator 2 E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Escalier 1 E1",
+    "name": "Escalier 1 E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "5d39d5797ef30400160072e4",
+    "name": "5d39d5797ef30400160072e4",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "ASC D E1",
+    "name": "ASC D E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "ASC C E1",
+    "name": "ASC C E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "ASC B E1",
+    "name": "ASC B E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "ASC A E1",
+    "name": "ASC A E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Escalier 5 E1",
+    "name": "Escalier 5 E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "ASC E E1",
+    "name": "ASC E E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "ASC F E1",
+    "name": "ASC F E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "ASC G E1",
+    "name": "ASC G E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "60d4581d974444001474ce18",
+    "name": "60d4581d974444001474ce18",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "ASC H E1",
+    "name": "ASC H E1",
+    "categories": [],
+    "floor": "B1-UL1"
+  },
+  {
+    "id": "Accueil Restaurant E2",
+    "name": "Accueil Restaurant E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "Restaurant E2",
+    "name": "Restaurant E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "6114e43c0823510015bf3f52",
+    "name": "6114e43c0823510015bf3f52",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "Escalier 3 E2",
+    "name": "Escalier 3 E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "Escalator E2",
+    "name": "Escalator E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "Escalier 2 E2",
+    "name": "Escalier 2 E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "Escalier 1 E2",
+    "name": "Escalier 1 E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "60b780bca2048e0014a736dd",
+    "name": "60b780bca2048e0014a736dd",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "Toilettes 1 E2",
+    "name": "Toilettes 1 E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "Toilettes 2 E2",
+    "name": "Toilettes 2 E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "ASC E E2",
+    "name": "ASC E E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "ASC F E2",
+    "name": "ASC F E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "ASC G E2",
+    "name": "ASC G E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "ASC H E2",
+    "name": "ASC H E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "ASC A E2",
+    "name": "ASC A E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "ASC B E2",
+    "name": "ASC B E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "ASC C E2",
+    "name": "ASC C E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "ASC D E2",
+    "name": "ASC D E2",
+    "categories": [],
+    "floor": "B1-UL2"
+  },
+  {
+    "id": "iViPlay",
+    "name": "iViPlay",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "ASC D E3",
+    "name": "ASC D E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "ASC C E3",
+    "name": "ASC C E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "60cb1bc4d1462200140f5cac",
+    "name": "60cb1bc4d1462200140f5cac",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "Escalier E3",
+    "name": "Escalier E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "ASC E E3",
+    "name": "ASC E E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "ASC F E3",
+    "name": "ASC F E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "ASC G E3",
+    "name": "ASC G E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "ASC H E3",
+    "name": "ASC H E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "ASC A E3",
+    "name": "ASC A E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "ASC B E3",
+    "name": "ASC B E3",
+    "categories": [],
+    "floor": "B1-UL3"
+  },
+  {
+    "id": "Auditorium",
+    "name": "Auditorium",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "Foyer",
+    "name": "Foyer",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "Business Center",
+    "name": "Business Center",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "Salle 3",
+    "name": "Salle 3",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "Salle 4",
+    "name": "Salle 4",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "Salle 5",
+    "name": "Salle 5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "Salle 2",
+    "name": "Salle 2",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "Salle 1",
+    "name": "Salle 1",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "60cb53017076c30014c47bbb",
+    "name": "60cb53017076c30014c47bbb",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "ASC E E5",
+    "name": "ASC E E5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "ASC F E5",
+    "name": "ASC F E5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "ASC G E5",
+    "name": "ASC G E5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "ASC H E5",
+    "name": "ASC H E5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "ASC A E5",
+    "name": "ASC A E5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "ASC B E5",
+    "name": "ASC B E5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "ASC C E5",
+    "name": "ASC C E5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "ASC D E5",
+    "name": "ASC D E5",
+    "categories": [],
+    "floor": "B1-UL5"
+  },
+  {
+    "id": "Restaurant E23",
+    "name": "Restaurant E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "Fitness",
+    "name": "Fitness",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "Local technique E23",
+    "name": "Local technique E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "Escalier 2 E23",
+    "name": "Escalier 2 E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "Escalier 1 E23",
+    "name": "Escalier 1 E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "60cb58c37076c30014c47c05",
+    "name": "60cb58c37076c30014c47c05",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "ASC E E23",
+    "name": "ASC E E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "ASC F E23",
+    "name": "ASC F E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "ASC G E23",
+    "name": "ASC G E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "ASC H E23",
+    "name": "ASC H E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "ASC A E23",
+    "name": "ASC A E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "ASC B E23",
+    "name": "ASC B E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "ASC C E23",
+    "name": "ASC C E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "ASC D E23",
+    "name": "ASC D E23",
+    "categories": [],
+    "floor": "B1-UL23"
+  },
+  {
+    "id": "Table de réunion",
+    "name": "Table de réunion",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Terrasse",
+    "name": "Terrasse",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Coworking",
+    "name": "Coworking",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Quiet Zone 3",
+    "name": "Quiet Zone 3",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Agora",
+    "name": "Agora",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Information",
+    "name": "Information",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Salle de réunion",
+    "name": "Salle de réunion",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Bureaux",
+    "name": "Bureaux",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Accueil",
+    "name": "Accueil",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Restauration",
+    "name": "Restauration",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Cafétéria marketing suite",
+    "name": "Cafétéria marketing suite",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Quiet Zone 1",
+    "name": "Quiet Zone 1",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Quiet Zone 2",
+    "name": "Quiet Zone 2",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Desk 1",
+    "name": "Desk 1",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Desk 2",
+    "name": "Desk 2",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Desk 3",
+    "name": "Desk 3",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Desk 4",
+    "name": "Desk 4",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Banc",
+    "name": "Banc",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Desk 5",
+    "name": "Desk 5",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Desk 6",
+    "name": "Desk 6",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Table Digitale",
+    "name": "Table Digitale",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Table basse",
+    "name": "Table basse",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Desk 8",
+    "name": "Desk 8",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Desk 7",
+    "name": "Desk 7",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Comptoir",
+    "name": "Comptoir",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Studio",
+    "name": "Studio",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Asc B",
+    "name": "Asc B",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Asc D",
+    "name": "Asc D",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Asc F",
+    "name": "Asc F",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Asc H",
+    "name": "Asc H",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Asc A",
+    "name": "Asc A",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Asc C",
+    "name": "Asc C",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Asc E",
+    "name": "Asc E",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Asc G",
+    "name": "Asc G",
+    "categories": [],
+    "floor": "B1-UL37"
+  },
+  {
+    "id": "Escaliers",
+    "name": "Escaliers",
+    "categories": [],
+    "floor": "B1-UL37"
+  }
+]

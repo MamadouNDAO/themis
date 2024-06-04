@@ -1,0 +1,50 @@
+<div class="page-generale">
+  <app-menu></app-menu>
+  <div class="container">
+    <div class="header-top">
+      <span class="title-service">Restauration</span>
+
+      <div class="info-user">
+        <div class="notif">
+          <img src="assets/icon/notification.png" alt="" class="icon-grised">
+        </div>
+        <img src="assets/icon/historique.png" alt="" class="icon-grised">
+        <img (click)="showSupp()" src="assets/icon/support.png" alt="">
+      </div>
+    </div>
+    <div class="content-dashbord">
+      <div class="my-iframe">
+        <iframe src="https://lacuisineconnectee.fr/fr1495riethemis" frameborder="0" allowfullscreen>
+
+        </iframe>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>
+
+<div class="popup-support" *ngIf="isSupport">
+  <div class="card-notification-act">
+    <div class="header-notif">
+      <span>Support</span>
+      <mat-icon (click)="showSupp()" class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="content-notif">
+      <div class="item-i-u">
+        <img src="assets/icon/organisation.png" alt="">
+        <span>Iviplay</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/admin.png" alt="">
+        <span>Support</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/mail.png" alt="">
+        <span>support@iviplay.com</span>
+      </div>
+    </div>
+  </div>
+</div>

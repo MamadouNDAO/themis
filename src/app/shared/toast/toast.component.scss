@@ -1,0 +1,58 @@
+.popup-toast{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.49);
+  z-index: 1000;
+
+  .card-toast{
+    position: relative;
+    right: 0;
+    top: 50px;
+    min-width: 300px;
+    float: right;
+    height: 70px;
+    background: #fff;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    .cd-type{
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+
+      height: 100%;
+      width: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .succes{
+      background: #013E17;
+    }
+    .error{
+      background: #FF2E00;
+    }
+    .right-part{
+      display: flex;flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 100%;
+    }
+    .text-type{
+      font-weight: 700;
+
+    }
+    .txt-succes{
+      color: #013E17;
+    }
+    .txt-error{
+      color: #FF2E00;
+    }
+  }
+}

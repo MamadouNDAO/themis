@@ -1,0 +1,149 @@
+<div class="page-generale">
+  <app-menu></app-menu>
+  <div class="container">
+    <div class="header-top">
+      <span class="title-service">Meteo</span>
+      <div class="container-search-meteo">
+        <div class="part-input-search">
+          <mat-icon  class="icon-password" fontSet="material-icons-outlined">search</mat-icon>
+          <input #villes (input)="myAutoMapComplete(villes)" [(ngModel)]="ville" type="text" placeholder="Ajouter une ville...">
+          <mat-icon (click)="deleteInputSearch()" *ngIf="ville.length > 0"  class="icon-close" fontSet="material-icons-outlined">close</mat-icon>
+        </div>
+        <div class="popup-search" *ngIf="isSearch">
+          <span (click)="closeSearch(itemVille)" *ngFor="let itemVille of suggestionVilles">{{ itemVille.description }}</span>
+        </div>
+      </div>
+      <div class="info-user">
+        <div class="notif">
+          <img src="assets/icon/notification.png" alt="" class="icon-grised">
+        </div>
+        <img src="assets/icon/historique.png" alt="" class="icon-grised">
+        <img (click)="showSupp()" src="assets/icon/support.png" alt="">
+      </div>
+    </div>
+    <div class="content-dashbord">
+
+
+      <table class="table-principal">
+        <thead class="tr-table">
+        <tr>
+          <th class="th-table th-icon">
+            <div>
+
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Lieu</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Description</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table">
+            <div>
+              <span>Temperature</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table t-little">
+            <div>
+              <span>Humidite</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table t-little">
+            <div>
+              <span>Pression</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table t-little">
+            <div>
+              <span>Vent</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table t-date">
+            <div>
+              <span>Date</span>
+              <img src="assets/icon/tree.png" alt="">
+            </div>
+          </th>
+          <th class="th-table th-action">
+            <div>
+
+            </div>
+          </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr   class="tr-table" >
+          <td  class="td-table th-icon"><img class="icon-meteo" [src]="baseUrl+meteoClichy.weather[0].icon+'.svg'" alt=""></td>
+          <td  class="td-table">{{meteoClichy.name}}</td>
+          <td  class="td-table">{{meteoClichy.weather[0].description}}</td>
+          <td  class="td-table t-little">{{meteoClichy.main.temp}}°C</td>
+          <td  class="td-table t-little">{{meteoClichy.main.humidity}}%</td>
+          <td  class="td-table t-little">{{meteoClichy.main.pressure}}</td>
+          <td  class="td-table t-little">{{meteoClichy.wind.speed}} km/h</td>
+          <td  class="td-table t-date">{{ getTimeHoraire(meteoClichy.timezone) | date: 'E dd MMMM HH:mm:ss' }}</td>
+          <td  class="td-table th-action">
+            <div class="td-action">
+              <img class="icon-grise"  src="assets/icon/meteo/delete.png" alt="">
+              <img  src="assets/icon/noir/cartographie.svg" alt="">
+            </div>
+          </td>
+        </tr>
+        <tr   class="tr-table" *ngFor="let item of meteos ; index as i">
+          <td  class="td-table th-icon"><img class="icon-meteo"  [src]="baseUrl+item.weather[0].icon+'.svg'" alt=""></td>
+          <td  class="td-table">{{item.name}}</td>
+          <td  class="td-table">{{item.weather[0].description}}</td>
+          <td  class="td-table t-little">{{item.main.temp}}°C</td>
+          <td  class="td-table t-little">{{item.main.humidity}}%</td>
+          <td  class="td-table t-little">{{item.main.pressure}}</td>
+          <td  class="td-table t-little">{{item.wind.speed}} km/h</td>
+          <td  class="td-table t-date">{{ getTimeHoraire(item.timezone) | date: 'E dd MMMM HH:mm:ss' }}</td>
+          <td  class="td-table th-action">
+            <div class="td-action">
+              <img (click)="removeMeteos(i)"  src="assets/icon/meteo/delete.png" alt="">
+              <img (click)="addToFavoris(i)" [src]="'assets/icon/meteo/'+getIconFavoris(item.favoris)" alt="">
+            </div>
+          </td>
+        </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="popup-support" *ngIf="isSupport">
+  <div class="card-notification-act">
+    <div class="header-notif">
+      <span>Support</span>
+      <mat-icon (click)="showSupp()" class="icon-password" fontSet="material-icons-outlined">close</mat-icon>
+    </div>
+    <div class="content-notif">
+      <div class="item-i-u">
+        <img src="assets/icon/organisation.png" alt="">
+        <span>Iviplay</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/admin.png" alt="">
+        <span>Support</span>
+      </div>
+      <div class="item-i-u">
+        <img src="assets/icon/mail.png" alt="">
+        <span>support@iviplay.com</span>
+      </div>
+    </div>
+  </div>
+</div>
